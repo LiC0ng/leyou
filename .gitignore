@@ -1,0 +1,3 @@
+# Project exclude paths
+/leyou-gateway/target/
+/leyou-registry/target/
