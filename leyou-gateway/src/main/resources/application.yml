@@ -10,3 +10,5 @@ eureka:
     registry-fetch-interval-seconds: 5
 zuul:
   prefix: /api
+  routes:
+    item-service: /item/** # 路由到商品的微服务
