@@ -1,4 +1,4 @@
-package com.leyou.config;
+package com.leyou.upload.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
