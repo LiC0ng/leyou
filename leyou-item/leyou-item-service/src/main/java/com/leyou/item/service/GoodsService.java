@@ -5,10 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.leyou.common.pojo.PageResult;
 import com.leyou.item.bo.SpuBo;
 import com.leyou.item.mapper.*;
-import com.leyou.item.pojo.Brand;
-import com.leyou.item.pojo.Spu;
-import com.leyou.item.pojo.SpuDetail;
-import com.leyou.item.pojo.Stock;
+import com.leyou.item.pojo.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,5 +113,30 @@ public class GoodsService {
             this.stockMapper.insertSelective(stock);
         });
 
+    }
+
+    /**
+     * 根据spuId查询spuDetail
+     * @param spuId
+     * @return
+     */
+    public SpuDetail querySpuDetailBySpuId(Long spuId) {
+        return this.spuDetailMapper.selectByPrimaryKey(spuId);
+    }
+
+    /**
+     * 根据spuId查询sku集合
+     * @param spuId
+     * @return
+     */
+    public List<Sku> querySkusBySpuId(Long spuId) {
+        Sku record = new Sku();
+        record.setSpuId(spuId);
+        List<Sku> skus = this.skuMapper.select(record);
+        skus.forEach(sku -> {
+            Stock stock = this.stockMapper.selectByPrimaryKey(sku.getId());
+            sku.setStock(stock.getStock());
+        });
+        return skus;
     }
 }
