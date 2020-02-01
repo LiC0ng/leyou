@@ -98,6 +98,17 @@ public class GoodsService {
         spuDetail.setSpuId(spuBo.getId());
         this.spuDetailMapper.insertSelective(spuDetail);
 
+        // 保存sku和stock
+        this.saveSkuAndStock(spuBo);
+
+    }
+
+    /**
+     * 保存sku和stock
+     *
+     * @param spuBo
+     */
+    public void saveSkuAndStock(SpuBo spuBo) {
         // 新增sku
         spuBo.getSkus().forEach(sku -> {
             sku.setId(null);
@@ -112,11 +123,11 @@ public class GoodsService {
             stock.setStock(sku.getStock());
             this.stockMapper.insertSelective(stock);
         });
-
     }
 
     /**
      * 根据spuId查询spuDetail
+     *
      * @param spuId
      * @return
      */
@@ -126,6 +137,7 @@ public class GoodsService {
 
     /**
      * 根据spuId查询sku集合
+     *
      * @param spuId
      * @return
      */
@@ -138,5 +150,41 @@ public class GoodsService {
             sku.setStock(stock.getStock());
         });
         return skus;
+    }
+
+    /**
+     * 更新商品信息
+     *
+     * @param spuBo
+     */
+    @Transactional
+    public void updateGoods(SpuBo spuBo) {
+
+        // 删除前先查询要删除的sku(根据spuId)
+        Sku record = new Sku();
+        record.setSpuId(spuBo.getId());
+        List<Sku> skus = this.skuMapper.select(record);
+        skus.forEach(sku -> {
+            // 先删除子表(stock)
+            this.stockMapper.deleteByPrimaryKey(sku.getId());
+        });
+
+        // 再删除主表(sku)
+        Sku sku = new Sku();
+        sku.setSpuId(spuBo.getId());
+        this.skuMapper.delete(sku);
+
+        // 接着新增主表(sku), 再新增(stock),
+        this.saveSkuAndStock(spuBo);
+
+        // 接着更新spu和spuDetail
+        spuBo.setCreateTime(null); // 不更新创建时间
+        spuBo.setLastUpdateTime(new Date()); // 更新最后更新的时间
+        spuBo.setSaleable(null); // 不该在这里更新
+        spuBo.setValid(null); // 不该在这里更新
+        this.spuMapper.updateByPrimaryKeySelective(spuBo);
+
+        this.spuDetailMapper.updateByPrimaryKeySelective(spuBo.getSpuDetail());
+
     }
 }
