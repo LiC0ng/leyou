@@ -59,6 +59,7 @@ public class BrandController {
 
     /**
      * 根据cid查询所有品牌信息
+     *
      * @param cid
      * @return
      */
@@ -69,5 +70,19 @@ public class BrandController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(brands);
+    }
+
+    /**
+     * 根据id查询品牌信息
+     * @param id
+     * @return
+     */
+    @GetMapping("{id}")
+    public ResponseEntity<Brand> queryBrandById(@PathVariable("id") Long id) {
+        Brand brand = this.brandService.quegryBrandById(id);
+        if (brand == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(brand);
     }
 }
