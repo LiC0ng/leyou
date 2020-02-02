@@ -40,4 +40,20 @@ public class CategoryController {
         // 200： 查询成功
         return ResponseEntity.ok(categories);
     }
+
+    /**
+     * 根据多个id查询对应的种类名称
+     * @param ids
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity<List<String>> queryNamesByIdS(@RequestParam("ids") List<Long> ids) {
+        List<String> names = this.categoryService.queryNamesByIds(ids);
+        if (CollectionUtils.isEmpty(names)) {
+            // 404: 资源未找到
+            return ResponseEntity.notFound().build();
+        }
+        // 200： 查询成功
+        return ResponseEntity.ok(names);
+    }
 }
