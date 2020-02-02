@@ -79,7 +79,7 @@ public class BrandController {
      */
     @GetMapping("{id}")
     public ResponseEntity<Brand> queryBrandById(@PathVariable("id") Long id) {
-        Brand brand = this.brandService.quegryBrandById(id);
+        Brand brand = this.brandService.queryBrandById(id);
         if (brand == null) {
             return ResponseEntity.notFound().build();
         }
