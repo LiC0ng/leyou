@@ -187,4 +187,13 @@ public class GoodsService {
         this.spuDetailMapper.updateByPrimaryKeySelective(spuBo.getSpuDetail());
 
     }
+
+    /**
+     * 根据spu id查询spu
+     * @param id
+     * @return
+     */
+    public Spu querySpuById(Long id) {
+        return this.spuMapper.selectByPrimaryKey(id);
+    }
 }
