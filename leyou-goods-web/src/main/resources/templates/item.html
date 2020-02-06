@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	<title>乐优商城--商品详情页</title>
-	 <link rel="icon" href="/assets/img/favicon.ico">
+	<link rel="icon" href="/assets/img/favicon.ico">
 
     <link rel="stylesheet" type="text/css" href="/css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="/css/pages-item.css" />
@@ -704,6 +704,15 @@ $(function(){
 <script type="text/javascript" src="/js/plugins/jquery.jqzoom/jquery.jqzoom.js"></script>
 <script type="text/javascript" src="/js/plugins/jquery.jqzoom/zoom.js"></script>
 <script type="text/javascript" src="index/index.js"></script>
+	<script th:inline="javascript">
+		const a = /*[[${groups}]]*/ [];
+		const b = /*[[${paramMap}]]*/ [];
+		const c = /*[[${categories}]]*/ [];
+		const d = /*[[${spu}]]*/ {};
+		const e = /*[[${spuDetail}]]*/ {};
+		const f = /*[[${skus}]]*/ [];
+		const g = /*[[${brand}]]*/ {};
+	</script>
 </body>
 
 </html>
