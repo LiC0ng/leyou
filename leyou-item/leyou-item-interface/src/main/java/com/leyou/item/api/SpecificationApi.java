@@ -26,5 +26,11 @@ public interface SpecificationApi {
             @RequestParam(value = "searching", required = false) Boolean searching
     );
 
+    /**
+     * 根据cid查询特殊规格参数
+     * @param cid
+     * @return
+     */
+    @GetMapping("group/param/{cid}")
     List<SpecGroup> queryGroupsWithParam(@PathVariable("cid") Long cid);
 }
