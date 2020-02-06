@@ -10,6 +10,7 @@ import com.leyou.search.client.GoodsClient;
 import com.leyou.search.client.SpecificationClient;
 import com.leyou.search.pojo.Goods;
 import com.leyou.search.pojo.SearchRequest;
+import com.leyou.search.pojo.SearchResult;
 import com.leyou.search.repository.GoodsRepository;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -158,7 +159,7 @@ public class SearchService {
      * @param request
      * @return
      */
-    public PageResult<Goods> search(SearchRequest request) {
+    public SearchResult search(SearchRequest request) {
         // 如果查询条件为空，则什么都不做
         if (StringUtils.isBlank(request.getKey())) {
             return null;
@@ -174,7 +175,7 @@ public class SearchService {
         // 执行查询，获取结果集
         Page<Goods> goodsPage = goodsRepository.search(queryBuilder.build());
 
-        return new PageResult<>(goodsPage.getTotalElements(), goodsPage.getTotalPages(), goodsPage.getContent());
+        return new SearchResult(goodsPage.getTotalElements(), goodsPage.getTotalPages(), goodsPage.getContent(), null, null);
 
     }
 }
