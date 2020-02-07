@@ -39,4 +39,13 @@ public class GoodsHtmlService {
         }
     }
 
+    /**
+     * 根据spu id删除对应的静态html
+     * @param spuId
+     */
+    public void deleteHtml(Long spuId) {
+        File file = new File("D:\\software\\nginx-1.17.7\\html\\item\\" + spuId + ".html");
+        file.deleteOnExit();
+    }
+
 }

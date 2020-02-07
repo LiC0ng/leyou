@@ -313,4 +313,22 @@ public class SearchService {
             return map;
         }).collect(Collectors.toList());
     }
+
+    /**
+     * 根据id创建或更新搜索索引
+     * @param id
+     */
+    public void save(Long id) throws IOException {
+        Spu spu = this.goodsClient.querySpuById(id);
+        Goods goods = this.buildGoods(spu);
+        this.goodsRepository.save(goods);
+    }
+
+    /**
+     * 根据id删除对应索引
+     * @param id
+     */
+    public void delete(Long id) {
+        this.goodsRepository.deleteById(id);
+    }
 }
