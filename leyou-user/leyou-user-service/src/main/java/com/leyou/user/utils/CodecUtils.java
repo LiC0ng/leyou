@@ -1,4 +1,4 @@
-package com.leyou.common.utils;
+package com.leyou.user.utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
