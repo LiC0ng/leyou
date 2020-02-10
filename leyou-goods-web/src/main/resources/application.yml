@@ -6,7 +6,7 @@ spring:
   thymeleaf:
     cache: false
   rabbitmq:
-    host: 34.84.220.122
+    host: 35.221.87.163
     virtual-host: /leyou
     username: leyou
     password: leyou

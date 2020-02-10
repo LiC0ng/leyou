@@ -9,9 +9,9 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    host: 34.84.220.122
+    host: 35.221.87.163
   rabbitmq:
-    host: 34.84.220.122
+    host: 35.221.87.163
     virtual-host: /leyou
     username: leyou
     password: leyou
