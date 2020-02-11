@@ -2,7 +2,7 @@ server:
   port: 8084
 spring:
   application:
-    name: goods_web
+    name: goods-web
   thymeleaf:
     cache: false
   rabbitmq:
