@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -32,6 +33,17 @@ public class CartController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(carts);
+    }
+
+    /**
+     * 更新购物车
+     * @param cart
+     * @return
+     */
+    @PutMapping
+    public ResponseEntity<Void> updateNum(@RequestBody Cart cart) {
+        this.cartService.updateNum(cart);
+        return ResponseEntity.noContent().build();
     }
 
 }

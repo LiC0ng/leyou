@@ -83,4 +83,28 @@ public class CartService {
         // 把List<Object>集合转化为List<Cart>集合
         return cartsJson.stream().map(cartJson -> JsonUtils.parse(cartJson.toString(), Cart.class)).collect(Collectors.toList());
     }
+
+    /**
+     * 更新购物车
+     * @param cart
+     */
+    public void updateNum(Cart cart) {
+        UserInfo userInfo = LoginIntercepter.getUserInfo();
+
+        // 判断有无购物车，没有则直接返回
+        if (!this.redisTemplate.hasKey(KEY_PREFIX + userInfo.getId())){
+            return;
+        }
+
+        Integer num = cart.getNum();
+
+        // 获取用户的购物车记录
+        BoundHashOperations<String, Object, Object> hashOperations = this.redisTemplate.boundHashOps(KEY_PREFIX + userInfo.getId());
+
+        String cartJson = hashOperations.get(cart.getSkuId().toString()).toString();
+        cart = JsonUtils.parse(cartJson, Cart.class);
+        cart.setNum(num);
+
+        hashOperations.put(cart.getSkuId().toString(), JsonUtils.serialize(cart));
+    }
 }
