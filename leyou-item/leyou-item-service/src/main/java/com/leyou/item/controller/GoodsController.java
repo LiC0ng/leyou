@@ -58,6 +58,7 @@ public class GoodsController {
 
     /**
      * 更新商品信息
+     *
      * @param spuBo
      * @return
      */
@@ -69,6 +70,7 @@ public class GoodsController {
 
     /**
      * 根据spuId查询spuDetail
+     *
      * @param spuId
      * @return
      */
@@ -83,6 +85,7 @@ public class GoodsController {
 
     /**
      * 根据spuId查询sku集合
+     *
      * @param spuId
      * @return
      */
@@ -97,6 +100,7 @@ public class GoodsController {
 
     /**
      * 根据spu id查询spu
+     *
      * @param id
      * @return
      */
@@ -107,5 +111,19 @@ public class GoodsController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(spu);
+    }
+
+    /**
+     * 根据skuId查询sku
+     * @param skuId
+     * @return
+     */
+    @GetMapping("sku/{skuId}")
+    public ResponseEntity<Sku> querySkuBySkuId(@PathVariable("skuId") Long skuId) {
+        Sku sku = this.goodsService.querySkuBySkuId(skuId);
+        if (sku == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(sku);
     }
 }
