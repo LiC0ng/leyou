@@ -649,8 +649,11 @@
 		methods: {
         	addCart() {
 				// 判断有没有登录
-				ly.http.get("/auth/verify").then(res=> {
-				// 已登录
+				ly.verify().then(res=> {
+					// 已登录
+					ly.http.post("/cart", {skuId: this.sku.id, num: this.num}).then(res => {
+						window.location = "http://www.leyou.com/cart.html"
+					})
 
 				}).catch(() => {
 					// 未登录保存到localStorage
@@ -666,7 +669,7 @@
 							skuId: this.sku.id,
 							image: this.images[0],
 							title: this.sku.title,
-							owmSpec: this.sku.owmSpec,
+							ownSpec: this.sku.ownSpec,
 							price: this.sku.price,
 							num: this.num
 						})
